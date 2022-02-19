@@ -1,0 +1,24 @@
+package com.pom;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class Continue {
+	@FindBy(xpath="//input[@type='radio']")
+	private WebElement button;
+	@FindBy(xpath="//input[@type='submit']")
+	private WebElement submit;
+	private WebDriver driver;
+	public WebElement getButton() {
+		return button;
+	}
+	public WebElement getSubmit() {
+		return submit;
+	}
+	public Continue(WebDriver driver) {
+		this.driver=driver;
+		PageFactory.initElements(driver, this);
+	}
+}

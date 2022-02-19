@@ -1,0 +1,134 @@
+package com.Project1;
+
+import java.util.concurrent.TimeUnit;
+
+import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.log4testng.Logger;
+
+import com.pom.Booking;
+import com.pom.Continue;
+import com.pom.Login;
+import com.pom.Page_Object_Manager;
+import com.pom.Search;
+
+import okhttp3.MultipartBody.Part;
+
+public class Adactin_Runner extends Base_P {
+static Logger log= Logger.getLogger(Adactin_Runner.class);
+	public static void main(String[] args) throws Throwable {
+//		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Mt\\eclipse-workspace\\Project1\\Driver\\chromedriver.exe");
+//		WebDriver driver=new ChromeDriver();
+		PropertyConfigurator.configure("log4j.properties");
+		driver = getBrowser("Chrome");
+		String url = File_Reader_Manager.getinstantFRM().getInstanceCR().get_url();
+		getUrl(url);
+		log.info("Browser Launch");
+		//driver.get("https://adactinhotelapp.com/");
+		//WebElement username = driver.findElement(By.xpath("//input[@id='username']"));
+		//username.sendKeys("mohamedthalha");
+		Page_Object_Manager pom=new Page_Object_Manager(driver);
+		String Username = File_Reader_Manager.getinstantFRM().getInstanceCR().get_Username();
+		//String username = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 1, 5);
+		InputElement(pom.getinstancelogin().getUsername(), Username);
+		//WebElement password = driver.findElement(By.xpath("//input[@id='password']"));
+		//password.sendKeys("MdThalha@123");
+		//String password = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 2, 5);
+		String password = File_Reader_Manager.getinstantFRM().getInstanceCR().get_password();
+		InputElement(pom.getinstancelogin().getPassword(),password);
+		log.info("Fetch the username and password from excel");
+		//WebElement login = driver.findElement(By.xpath("//input[@id='login']"));
+		ClickonElement(pom.getinstancelogin().getLogin());
+		//WebElement location = driver.findElement(By.xpath("//select[@name='location']"));
+		//location.sendKeys("New York");
+		String location = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 4, 5);
+		InputElement(pom.getinstantsearch().getLocation(), location);
+		//WebElement hotel = driver.findElement(By.xpath("//select[@name='location']"));
+		//hotel.sendKeys("Hotel Sunshine");
+		String Hotel = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 5, 5);
+		InputElement(pom.getinstantsearch().getHotel(), Hotel);
+		//WebElement room = driver.findElement(By.xpath("//select[@name='room_type']"));
+		//room.sendKeys("Super Deluxe");
+		String Room = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 6, 5);
+		InputElement(pom.getinstantsearch().getRoom(), Room);
+		//WebElement nos = driver.findElement(By.xpath("//select[@name='room_nos']"));
+		//nos.sendKeys("2-Two");
+		String nos = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 7, 5);
+		InputElement(pom.getinstantsearch().getNos(), nos);
+		//WebElement checkin = driver.findElement(By.xpath("//input[@name='datepick_in']"));
+		//checkin.sendKeys("17/01/2022");
+		String checkin = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 8, 5);
+		InputElement(pom.getinstantsearch().getCheckin(), checkin);
+		//WebElement checkout = driver.findElement(By.xpath("//input[@name='datepick_out']"));
+		//checkout.sendKeys("26/01/2022");
+		String checkout = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 9, 5);
+		InputElement(pom.getinstantsearch().getCheckout(), checkout);
+		//WebElement adult = driver.findElement(By.xpath("//select[@name='adult_room']"));
+		//adult.sendKeys("2-Two");
+		String adult = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 10, 5);
+		InputElement(pom.getinstantsearch().getAdult(), adult);
+		//WebElement child = driver.findElement(By.xpath("//select[@name='child_room']"));
+		//child.sendKeys("1-One");
+		String child = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 11, 5);
+		InputElement(pom.getinstantsearch().getChild(), child);
+		//WebElement search = driver.findElement(By.xpath("//input[@type='submit']"));
+		//search.click();
+		ClickonElement(pom.getinstantsearch().getSearch());
+		//WebElement button = driver.findElement(By.xpath("//input[@type='radio']"));
+		//button.click();
+		ClickonElement(pom.getinstantcontinue().getButton());
+		//WebElement contiue = driver.findElement(By.xpath("//input[@type='submit']"));
+		//contiue.click();
+		ClickonElement(pom.getinstantcontinue().getSubmit());
+		//WebElement FN = driver.findElement(By.xpath("//input[@name='first_name']"));
+		//FN.sendKeys("Youth");
+		String FN = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 15, 5);
+		InputElement(pom.getinstantbooking().getFN(), FN);
+		//WebElement LN = driver.findElement(By.xpath("//input[@name='last_name']"));
+		//LN.sendKeys("Mass");
+		String LN = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 16, 5);
+		InputElement(pom.getinstantbooking().getLN(), LN);
+		//WebElement address = driver.findElement(By.xpath("//textarea[@name='address']"));
+		//address.sendKeys("1234");
+		String address = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 17, 5);
+		InputElement(pom.getinstantbooking().getAddress(), address);
+		//WebElement ccnum = driver.findElement(By.xpath("//input[@name='cc_num']"));
+		//ccnum.sendKeys("1234567890123456");
+		String ccnum  = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 18, 5);
+		InputElement(pom.getinstantbooking().getCcnum(), ccnum);
+		//WebElement ccType = driver.findElement(By.xpath("//select[@name='cc_type']"));
+		//ccType.sendKeys("VISA");
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		String cctype = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 17, 5);
+		InputElement(pom.getinstantbooking().getCcType(), cctype);
+		//WebElement expDate = driver.findElement(By.xpath("//select[@name='cc_exp_month']"));
+		//expDate.sendKeys("September");
+		String expdate = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 18, 5);
+		InputElement(pom.getinstantbooking().getExpDate(), expdate);
+		//WebElement expYear = driver.findElement(By.xpath("//select[@name='cc_exp_year']"));
+		//expYear.sendKeys("2024");
+		String expyr = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 19, 5);
+		InputElement(pom.getinstantbooking().getExpyear(), expyr);
+		//WebElement ccv = driver.findElement(By.xpath("//input[@name='cc_cvv']"));
+		//ccv.sendKeys("456");
+		String ccv = Particular_value("C:\\Users\\Mt\\Desktop\\Test case.xlsx", 20, 5);
+		InputElement(pom.getinstantbooking().getCcv(), ccv);
+		//WebElement book = driver.findElement(By.xpath("//input[@name='book_now']"));
+		//book.click();
+		ClickonElement(pom.getinstantbooking().getBook());
+//		Actions act=new Actions(driver);
+//		WebElement move = driver.findElement(By.xpath("//input[@value='My Itinerary']"));
+//	    act.moveToElement(move).build().perform();
+		Thread.sleep(3000);
+		//WebElement iter = driver.findElement(By.xpath("//input[@value='My Itinerary']"));
+		//iter.click();
+		ClickonElement(pom.getinstantbooking().getIter());
+		
+		
+		
+	}
+	}
